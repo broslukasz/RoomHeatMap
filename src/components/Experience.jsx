@@ -12,7 +12,7 @@ export const Experience = () => {
   return (
     <>
       <OrbitControls />
-      <points position={[0, 0, 0]}>
+      <points position={[-0.5, -0.5, -0.5]}>
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" count={positions.length / 3} array={positions} itemSize={3} />
         </bufferGeometry>
