@@ -1,11 +1,42 @@
 import { OrbitControls } from "@react-three/drei";
 
-const count = 1000;
-const positions = new Float32Array(count * 3);
+const dimentionSize = 5;
+const particlesCount = dimentionSize * dimentionSize * dimentionSize;
+
+const positions = new Float32Array(particlesCount * 3);
 
 let i;
-for(i = 0; i < count * 3; i++) {
-  positions[i] = Math.random();
+
+let currentParticlePosition = [0, 0, 0]
+let allPositions = [];
+
+for(i = 0; i < particlesCount; i++) {
+  positions[i * 3] = currentParticlePosition[0];
+  positions[i * 3 + 1] = currentParticlePosition[1];
+  positions[i * 3 + 2] = currentParticlePosition[2];
+
+  generateNextParticle();
+}
+
+function generateNextParticle () {
+  const maxSize = dimentionSize - 1;
+
+  if(currentParticlePosition[1] === maxSize && currentParticlePosition[0] === maxSize) {
+    currentParticlePosition[0] = 0;
+    currentParticlePosition[1] = 0;
+    currentParticlePosition[2]++;
+
+    return;
+  }
+
+  if(currentParticlePosition[0] === maxSize) {
+    currentParticlePosition[0] = 0;
+    currentParticlePosition[1]++;
+
+    return;
+  }
+
+  currentParticlePosition[0]++;
 }
 
 export const Experience = () => {
@@ -16,7 +47,7 @@ export const Experience = () => {
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" count={positions.length / 3} array={positions} itemSize={3} />
         </bufferGeometry>
-        <pointsMaterial size={0.02} sizeAttenuation={true}  />
+        <pointsMaterial size={0.5} sizeAttenuation={true}  />
       </points>
     </>
   );
