@@ -13,6 +13,7 @@ export default function RoomParticles() {
 
   // console.log(particlesRef.current.geometry.attributes);
   let x, y, z;
+  let i, i3;
   
   useFrame((state) =>
   {
@@ -20,8 +21,6 @@ export default function RoomParticles() {
     const particleGeometry = particlesRef.current.geometry;
     const floatingFactor = 0.00015
 
-    let i;
-    let i3;
     for(i  = 0; i < positions.length; i++) {
       i3 = i * 3;
 
