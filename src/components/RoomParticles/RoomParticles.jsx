@@ -11,7 +11,6 @@ export default function RoomParticles() {
   const texture = useTexture('src/assets/particle.png');
   const particlesRef = useRef();
 
-  // console.log(particlesRef.current.geometry.attributes);
   let x, y, z;
   let i, i3;
   
