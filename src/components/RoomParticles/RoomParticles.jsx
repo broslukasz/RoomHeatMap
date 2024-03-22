@@ -12,18 +12,26 @@ export default function RoomParticles() {
   const particlesRef = useRef();
 
   // console.log(particlesRef.current.geometry.attributes);
+  let x, y, z;
   
   useFrame((state) =>
   {
     const elapsedTime = state.clock.getElapsedTime();
     const particleGeometry = particlesRef.current.geometry;
-    const floatingFactor = 0.001;
+    const floatingFactor = 0.00015
 
     let i;
     let i3;
     for(i  = 0; i < positions.length; i++) {
       i3 = i * 3;
-      particleGeometry.attributes.position.array[i3 + 0] = particleGeometry.attributes.position.array[i3 + 0] + Math.sin(elapsedTime) * floatingFactor;
+
+      x = particleGeometry.attributes.position.array[i3];
+      y = particleGeometry.attributes.position.array[i3 + 1];
+      z = particleGeometry.attributes.position.array[i3 + 2];
+
+      particleGeometry.attributes.position.array[i3] = particleGeometry.attributes.position.array[i3] + Math.sin(elapsedTime + x) * floatingFactor;
+      particleGeometry.attributes.position.array[i3 + 1] = particleGeometry.attributes.position.array[i3 + 1] + Math.sin(elapsedTime + y) * floatingFactor;
+      particleGeometry.attributes.position.array[i3 + 2] = particleGeometry.attributes.position.array[i3 + 2] + Math.sin(elapsedTime + z) * floatingFactor;
     }
 
     particleGeometry.attributes.position.needsUpdate = true;
