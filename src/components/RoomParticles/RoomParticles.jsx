@@ -1,11 +1,9 @@
 import { useTexture } from '@react-three/drei';
-import getQubePositions from './getQubePositions';
-import getQubeColors from './getQubeColors';
+import getRoomParameters from './getRoomParameters';
 
-export default function Particles() {
+export default function RoomParticles() {
   const qubeSize = 4;
-  const positions = getQubePositions(qubeSize);
-  const colors = getQubeColors(qubeSize, [1, 1, 2], 2);
+  const [positions, colors] = getRoomParameters(qubeSize, {position: [1, 1, 2], colorRange: 2 });
 
   const texture = useTexture('src/assets/particle.png');
   
