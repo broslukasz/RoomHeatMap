@@ -5,8 +5,8 @@ import getRoomParameters from './getRoomParameters';
 import { useRef } from 'react';
 
 export default function RoomParticles() {
-  const qubeSize = 4;
-  const [positions, colors] = getRoomParameters(qubeSize, {position: [1, 1, 2], colorRange: 1 });
+  const qubeSize = 5;
+  const [positions, colors] = getRoomParameters(qubeSize, {position: [2, 2, 3], colorRange: 1 });
 
   const texture = useTexture('src/assets/particle.png');
   const particlesRef = useRef();
