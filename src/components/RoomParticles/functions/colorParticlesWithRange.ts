@@ -16,25 +16,25 @@ export function colorParticleWithRange(colors: Float32Array, colorSettings: ICol
     translatedX = x + value;
     translatedPointInFloatIndex = translatedX + y * yIndexOffset + z * zIndexOffset;
     
-    colors[translatedPointInFloatIndex * 3] = 1;
+    colors[translatedPointInFloatIndex * 3] = 0.2;
     colors[translatedPointInFloatIndex * 3 + 1] = 0;
-    colors[translatedPointInFloatIndex * 3 + 2] = 0;
+    colors[translatedPointInFloatIndex * 3 + 2] = 0.02;
 
     allValues.forEach((value) => {
       translatedY = y + value;
       translatedPointInFloatIndex = translatedX + translatedY * yIndexOffset + z * zIndexOffset;
 
-      colors[translatedPointInFloatIndex * 3] = 1;
+      colors[translatedPointInFloatIndex * 3] = 0.2;
       colors[translatedPointInFloatIndex * 3 + 1] = 0;
-      colors[translatedPointInFloatIndex * 3 + 2] = 0;
+      colors[translatedPointInFloatIndex * 3 + 2] = 0.02;
 
       allValues.forEach((value) => {
         translatedZ = z + value;
         translatedPointInFloatIndex = translatedX + translatedY * yIndexOffset + translatedZ * zIndexOffset;
   
-        colors[translatedPointInFloatIndex * 3] = 1;
+        colors[translatedPointInFloatIndex * 3] = 0.2;
         colors[translatedPointInFloatIndex * 3 + 1] = 0;
-        colors[translatedPointInFloatIndex * 3 + 2] = 0;
+        colors[translatedPointInFloatIndex * 3 + 2] = 0.02;
       })
     })
   })
