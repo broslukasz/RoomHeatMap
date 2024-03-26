@@ -40,6 +40,6 @@ export default function RoomParticles() {
     <bufferAttribute attach="attributes-position" count={positions.length / 3} array={positions} itemSize={3} />
     <bufferAttribute attach="attributes-color" count={colors.length / 3} array={colors} itemSize={3} />
   </bufferGeometry>
-  <pointsMaterial vertexColors={true} depthWrite={false} transparent={true} alphaMap={texture} size={4} sizeAttenuation={true}  />
+  <pointsMaterial vertexColors={true} depthWrite={false} transparent={true} alphaMap={texture} size={3} sizeAttenuation={true}  />
 </points>
 }
