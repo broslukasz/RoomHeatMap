@@ -1,5 +1,5 @@
 import { IColorSettings } from "./models/IColorSettings";
-import colorSelectedParticle from "./functions/colorSelectedParticle";
+import colorSelectedParticle, { colorParticleAroundSelected } from "./functions/colorSelectedParticle";
 
 export default function getRoomParameters(qubeSize: number, colorSettings: IColorSettings): [Float32Array, Float32Array] {
   const particlesCount = qubeSize * qubeSize * qubeSize;
@@ -60,5 +60,6 @@ export default function getRoomParameters(qubeSize: number, colorSettings: IColo
 
   function assignColors(): void {
     colors = colorSelectedParticle(colors, colorSettings);
+    colors = colorParticleAroundSelected(colors, colorSettings);
   }
 }
