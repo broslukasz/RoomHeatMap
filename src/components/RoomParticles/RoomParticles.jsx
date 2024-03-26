@@ -18,7 +18,7 @@ export default function RoomParticles() {
   {
     const elapsedTime = state.clock.getElapsedTime();
     const particleGeometry = particlesRef.current.geometry;
-    const floatingFactor = 0.00015
+    const floatingFactor = 0.0003
 
     for(i  = 0; i < positions.length; i++) {
       i3 = i * 3;
