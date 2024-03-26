@@ -39,8 +39,6 @@ export function colorParticleAroundSelected(colors: Float32Array, colorSettings:
       translatedY = y + value;
       translatedPointInFloatIndex = translatedX + translatedY * 4 + z * 16;
 
-      console.log(value, translatedX, translatedY)
-      
       colors[translatedPointInFloatIndex * 3] = 1;
       colors[translatedPointInFloatIndex * 3 + 1] = 0;
       colors[translatedPointInFloatIndex * 3 + 2] = 0;
