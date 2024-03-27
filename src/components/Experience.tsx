@@ -12,16 +12,16 @@ export const Experience = () => {
     z: { value: 3, min: 1, max: 20, step: 1 }
   }
 
-  const colorRangeControl = {
+  const selectionRangeControl = {
     value: 1, min: 0, max: 5, step: 1
   }
 
-  const {  qubeSize, performanceVisible, colorRange, X, Y, Z } = useControls({ 
+  const {  qubeSize, performanceVisible, selectionRange, X, Y, Z } = useControls({ 
       qubeSize: qubeSizeControl,
       X: positionControl.x,
       Y: positionControl.y,
       Z: positionControl.z,
-      colorRange: colorRangeControl,
+      selectionRange: selectionRangeControl,
       performanceVisible: false,
   })
   
@@ -29,7 +29,7 @@ export const Experience = () => {
     <>
       { performanceVisible && <Perf position={'top-left'}></Perf>}
       <OrbitControls />
-      <QubeParticles qubeSize={qubeSize} position={[X, Y, Z]} colorRange={colorRange} />
+      <QubeParticles qubeSize={qubeSize} position={[X, Y, Z]} selectionRange={selectionRange} />
     </>
   );
 };

@@ -7,24 +7,24 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 type QubeParticlesProps = {
   qubeSize: number;
   position: [number, number, number],
-  colorRange?: number;
+  selectionRange?: number;
 }
 
-export default function QubeParticles({qubeSize, position, colorRange = 0}: QubeParticlesProps) {
+export default function QubeParticles({qubeSize, position, selectionRange = 0}: QubeParticlesProps) {
   const { clock } = useThree();
   let geometryRef = useRef<THREE.BufferGeometry>(null);
   let pointsMaterialRef = useRef<THREE.PointsMaterial>(null);
   let particlesRef = useRef<THREE.Points>(null);
 
   let [positions, colors] = useMemo(() => {
-    return getRoomParameters(qubeSize, {position, colorRange });    
-  }, [qubeSize, position, colorRange])
+    return getRoomParameters(qubeSize, {position, selectionRange });    
+  }, [qubeSize, position, selectionRange])
 
   useEffect(() =>{
     geometryRef.current.dispose();
     pointsMaterialRef.current.dispose();
     particlesRef.current.clear();
-  }, [qubeSize, colorRange, position])
+  }, [qubeSize, selectionRange, position])
 
   const texture = useTexture('src/assets/particle.png');
 
