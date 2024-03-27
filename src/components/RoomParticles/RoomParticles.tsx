@@ -12,8 +12,8 @@ export default function RoomParticles() {
   const texture = useTexture('src/assets/particle.png');
   const particlesRef = useRef<THREE.Points>(null!);
 
-  let x, y, z;
-  let i, i3;
+  let x: number, y: number, z: number;
+  let i: number, i3: number;
   
   useFrame((state) =>
   {
