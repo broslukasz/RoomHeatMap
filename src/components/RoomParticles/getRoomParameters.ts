@@ -36,8 +36,8 @@ export default function getRoomParameters(qubeSize: number, colorSettings: IColo
   
 
   assignColors();
-  
-  return [positions, colors];
+
+    return [positions, colors];
 
   function generateNextParticle(): void {
     const maxSize = qubeSize - 1;

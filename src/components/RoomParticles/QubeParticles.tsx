@@ -12,7 +12,7 @@ type QubeParticlesProps = {
 
 export default function QubeParticles({qubeSize, position, colorRange = 0}: QubeParticlesProps) {
   const { clock } = useThree();
-  const [positions, colors] = useMemo(() => {
+  let [positions, colors] = useMemo(() => {
     return getRoomParameters(qubeSize, {position, colorRange });
   }, [qubeSize, position, colorRange])
 
