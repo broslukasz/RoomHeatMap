@@ -3,13 +3,15 @@ import { useFrame } from '@react-three/fiber'
 
 import getRoomParameters from './getRoomParameters';
 import { useRef } from 'react';
+import * as React from 'react';
+import { BufferGeometry, NormalBufferAttributes } from 'three';
 
 export default function RoomParticles() {
   const qubeSize = 5;
   const [positions, colors] = getRoomParameters(qubeSize, {position: [2, 2, 3], colorRange: 1 });
 
   const texture = useTexture('src/assets/particle.png');
-  const particlesRef = useRef();
+  const particlesRef = useRef<THREE.Points>(null!);
 
   let x, y, z;
   let i, i3;
@@ -17,7 +19,7 @@ export default function RoomParticles() {
   useFrame((state) =>
   {
     const elapsedTime = state.clock.getElapsedTime();
-    const particleGeometry = particlesRef.current.geometry;
+    const particleGeometry = particlesRef.current.geometry as BufferGeometry<NormalBufferAttributes>;
     const floatingFactor = 0.0003
 
     for(i  = 0; i < positions.length; i++) {
