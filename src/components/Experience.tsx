@@ -1,11 +1,11 @@
 import { OrbitControls } from "@react-three/drei";
-import RoomParticles from "./RoomParticles/RoomParticles";
+import QubeParticles from "./RoomParticles/QubeParticles";
 
 export const Experience = () => {
   return (
     <>
       <OrbitControls />
-      <RoomParticles />
+      <QubeParticles qubeSize={5} />
     </>
   );
 };

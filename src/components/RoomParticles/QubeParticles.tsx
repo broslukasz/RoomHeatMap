@@ -4,12 +4,15 @@ import { useFrame, useThree } from '@react-three/fiber'
 import getRoomParameters from './getRoomParameters';
 import { useMemo, useRef } from 'react';
 
-export default function RoomParticles() {
+type QubeParticlesProps = {
+  qubeSize: number;
+}
+
+export default function QubeParticles({qubeSize}: QubeParticlesProps) {
   const { clock } = useThree();
-  const qubeSize = 5;
   const [positions, colors] = useMemo(() => {
     return getRoomParameters(qubeSize, {position: [2, 2, 3], colorRange: 1 });
-  }, [])
+  }, [qubeSize])
 
   const texture = useTexture('src/assets/particle.png');
   const particlesRef = useRef<THREE.Points>(null!);
