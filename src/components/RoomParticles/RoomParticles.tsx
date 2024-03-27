@@ -19,7 +19,7 @@ export default function RoomParticles() {
   {
     const elapsedTime = clock.getElapsedTime();
     const particleGeometry = particlesRef.current.geometry;
-    const floatingFactor = 0.0003
+    const floatingFactor = 0.0003;
 
     for(i  = 0; i < positions.length; i++) {
       i3 = i * 3;
@@ -39,8 +39,16 @@ export default function RoomParticles() {
   return (
     <points ref={particlesRef} position={[-qubeSize / 2 + 0.5, -qubeSize / 2 + 0.5, -qubeSize / 2 + 0.5]}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={positions.length / 3} array={positions} itemSize={3} />
-        <bufferAttribute attach="attributes-color" count={colors.length / 3} array={colors} itemSize={3} />
+        <bufferAttribute
+          attach="attributes-position"
+          count={positions.length / 3}
+          array={positions}
+          itemSize={3} />
+        <bufferAttribute
+          attach="attributes-color"
+          count={colors.length / 3}
+          array={colors}
+          itemSize={3} />
       </bufferGeometry>
       <pointsMaterial vertexColors={true} depthWrite={false} transparent={true} alphaMap={texture} size={3} sizeAttenuation={true}  />
     </points>
