@@ -3,7 +3,6 @@ import { useFrame } from '@react-three/fiber'
 
 import getRoomParameters from './getRoomParameters';
 import { useRef } from 'react';
-import * as React from 'react';
 
 export default function RoomParticles() {
   const qubeSize = 5;
