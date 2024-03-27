@@ -2,7 +2,7 @@ import { useTexture } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber'
 
 import getRoomParameters from './getRoomParameters';
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 type QubeParticlesProps = {
   qubeSize: number;
@@ -12,12 +12,21 @@ type QubeParticlesProps = {
 
 export default function QubeParticles({qubeSize, position, colorRange = 0}: QubeParticlesProps) {
   const { clock } = useThree();
+  let geometryRef = useRef<THREE.BufferGeometry>(null);
+  let pointsMaterialRef = useRef<THREE.PointsMaterial>(null);
+  let particlesRef = useRef<THREE.Points>(null);
+
   let [positions, colors] = useMemo(() => {
-    return getRoomParameters(qubeSize, {position, colorRange });
+    return getRoomParameters(qubeSize, {position, colorRange });    
   }, [qubeSize, position, colorRange])
 
+  useEffect(() =>{
+    geometryRef.current.dispose();
+    pointsMaterialRef.current.dispose();
+    particlesRef.current.clear();
+  }, [qubeSize, colorRange, position])
+
   const texture = useTexture('src/assets/particle.png');
-  const particlesRef = useRef<THREE.Points>(null!);
 
   let x: number, y: number, z: number;
   let i: number, i3: number;
@@ -45,7 +54,7 @@ export default function QubeParticles({qubeSize, position, colorRange = 0}: Qube
   
   return (
     <points ref={particlesRef} position={[-qubeSize / 2 + 0.5, -qubeSize / 2 + 0.5, -qubeSize / 2 + 0.5]}>
-      <bufferGeometry>
+      <bufferGeometry ref={geometryRef}>
         <bufferAttribute
           attach="attributes-position"
           count={positions.length / 3}
@@ -57,7 +66,7 @@ export default function QubeParticles({qubeSize, position, colorRange = 0}: Qube
           array={colors}
           itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial needsUpdate={true} vertexColors={true} depthWrite={false} transparent={true} alphaMap={texture} size={3} sizeAttenuation={true}  />
+      <pointsMaterial ref={pointsMaterialRef} needsUpdate={true} vertexColors={true} depthWrite={false} transparent={true} alphaMap={texture} size={3} sizeAttenuation={true}  />
     </points>
   )
 }
