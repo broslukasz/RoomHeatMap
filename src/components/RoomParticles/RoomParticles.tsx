@@ -1,10 +1,11 @@
 import { useTexture } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 
 import getRoomParameters from './getRoomParameters';
 import { useRef } from 'react';
 
 export default function RoomParticles() {
+  const { clock } = useThree();
   const qubeSize = 5;
   const [positions, colors] = getRoomParameters(qubeSize, {position: [2, 2, 3], colorRange: 1 });
 
@@ -14,9 +15,9 @@ export default function RoomParticles() {
   let x: number, y: number, z: number;
   let i: number, i3: number;
   
-  useFrame((state) =>
+  useFrame(() =>
   {
-    const elapsedTime = state.clock.getElapsedTime();
+    const elapsedTime = clock.getElapsedTime();
     const particleGeometry = particlesRef.current.geometry;
     const floatingFactor = 0.0003
 
