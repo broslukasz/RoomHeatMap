@@ -36,11 +36,13 @@ export default function RoomParticles() {
     particleGeometry.attributes.position.needsUpdate = true;
   })
   
-  return <points ref={particlesRef} position={[-qubeSize / 2 + 0.5, -qubeSize / 2 + 0.5, -qubeSize / 2 + 0.5]}>
-  <bufferGeometry>
-    <bufferAttribute attach="attributes-position" count={positions.length / 3} array={positions} itemSize={3} />
-    <bufferAttribute attach="attributes-color" count={colors.length / 3} array={colors} itemSize={3} />
-  </bufferGeometry>
-  <pointsMaterial vertexColors={true} depthWrite={false} transparent={true} alphaMap={texture} size={3} sizeAttenuation={true}  />
-</points>
+  return (
+    <points ref={particlesRef} position={[-qubeSize / 2 + 0.5, -qubeSize / 2 + 0.5, -qubeSize / 2 + 0.5]}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" count={positions.length / 3} array={positions} itemSize={3} />
+        <bufferAttribute attach="attributes-color" count={colors.length / 3} array={colors} itemSize={3} />
+      </bufferGeometry>
+      <pointsMaterial vertexColors={true} depthWrite={false} transparent={true} alphaMap={texture} size={3} sizeAttenuation={true}  />
+    </points>
+  )
 }

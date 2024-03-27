@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "react": [ "./node_modules/@types/react" ]
+    },
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-jsx",
+  }
+}
