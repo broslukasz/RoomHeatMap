@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import particlesVertexShader from './shaders/particles.vertex.glsl'
 import particlesFragmentShader from './shaders/particles.fragment.glsl'
+import { AdditiveBlending } from 'three';
 
 type QubeParticlesProps = {
   particleSize: number;
@@ -76,6 +77,7 @@ export default function QubeParticles({particleSize, qubeSize, position, selecti
         vertexColors={true}
         needsUpdate={true}
         transparent={true}
+        blending={AdditiveBlending}
         vertexShader={particlesVertexShader}
         fragmentShader={particlesFragmentShader}
         uniforms={{
