@@ -4,16 +4,20 @@ import { useFrame, useThree } from '@react-three/fiber'
 import getRoomParameters from './getRoomParameters';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
+import particlesVertexShader from './shaders/particles.vertex.glsl'
+import particlesFragmentShader from './shaders/particles.fragment.glsl'
+
 type QubeParticlesProps = {
+  particleSize: number;
   qubeSize: number;
   position: [number, number, number],
   selectionRange?: number;
 }
 
-export default function QubeParticles({qubeSize, position, selectionRange = 0}: QubeParticlesProps) {
-  const { clock } = useThree();
+export default function QubeParticles({particleSize, qubeSize, position, selectionRange = 0}: QubeParticlesProps) {
+  const { clock, gl, scene } = useThree();
   let geometryRef = useRef<THREE.BufferGeometry>(null);
-  let pointsMaterialRef = useRef<THREE.PointsMaterial>(null);
+  let pointsMaterialRef = useRef<THREE.ShaderMaterial>(null);
   let particlesRef = useRef<THREE.Points>(null);
 
   let [positions, colors] = useMemo(() => {
@@ -51,7 +55,7 @@ export default function QubeParticles({qubeSize, position, selectionRange = 0}: 
 
     particleGeometry.attributes.position.needsUpdate = true;
   })
-  
+
   return (
     <points ref={particlesRef} position={[-qubeSize / 2 + 0.5, -qubeSize / 2 + 0.5, -qubeSize / 2 + 0.5]}>
       <bufferGeometry ref={geometryRef}>
@@ -66,7 +70,18 @@ export default function QubeParticles({qubeSize, position, selectionRange = 0}: 
           array={colors}
           itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial ref={pointsMaterialRef} needsUpdate={true} vertexColors={true} depthWrite={false} transparent={true} alphaMap={texture} size={3} sizeAttenuation={true}  />
+      <shaderMaterial
+        ref={pointsMaterialRef}
+        depthWrite={false}
+        vertexColors={true}
+        needsUpdate={true}
+        transparent={true}
+        vertexShader={particlesVertexShader}
+        fragmentShader={particlesFragmentShader}
+        uniforms={{
+          uSize: {value: particleSize * gl.getPixelRatio()}
+        }}
+         />
     </points>
   )
 }

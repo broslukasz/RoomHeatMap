@@ -4,7 +4,8 @@ import { useControls } from "leva";
 import { Perf } from "r3f-perf";
 
 export const Experience = () => {
-  const qubeSizeControl = { value: 5, min: 1, max: 20, step: 1 }
+  const particleSizeControl = { value: 200, min: 50, max: 400, step: 10 };
+  const qubeSizeControl = { value: 5, min: 1, max: 20, step: 1 };
 
   const positionControl = {
     x: { value: 2, min: 1, max: 20, step: 1 },
@@ -16,7 +17,8 @@ export const Experience = () => {
     value: 1, min: 0, max: 5, step: 1
   }
 
-  const {  qubeSize, performanceVisible, selectionRange, X, Y, Z } = useControls({ 
+  const {  particleSize, qubeSize, performanceVisible, selectionRange, X, Y, Z } = useControls({ 
+      particleSize: particleSizeControl,  
       qubeSize: qubeSizeControl,
       X: positionControl.x,
       Y: positionControl.y,
@@ -29,7 +31,7 @@ export const Experience = () => {
     <>
       { performanceVisible && <Perf position={'top-left'}></Perf>}
       <OrbitControls />
-      <QubeParticles qubeSize={qubeSize} position={[X, Y, Z]} selectionRange={selectionRange} />
+      <QubeParticles particleSize={particleSize} qubeSize={qubeSize} position={[X, Y, Z]} selectionRange={selectionRange} />
     </>
   );
 };
