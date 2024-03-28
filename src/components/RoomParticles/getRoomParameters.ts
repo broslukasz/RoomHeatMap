@@ -27,9 +27,9 @@ export default function getRoomParameters(qubeSize: number, colorSettings: IColo
     positions[currentPositionInFloatY] = currentParticlePosition[yIndex];
     positions[currentPositionInFloatZ] = currentParticlePosition[zIndex];
 
-    colors[currentPositionInFloatX] = 1;
-    colors[currentPositionInFloatY] = 1;
-    colors[currentPositionInFloatZ] = 1;
+    colors[currentPositionInFloatX] = 0.8;
+    colors[currentPositionInFloatY] = 0.8;
+    colors[currentPositionInFloatZ] = 0.8;
 
     generateNextParticle();
   }
