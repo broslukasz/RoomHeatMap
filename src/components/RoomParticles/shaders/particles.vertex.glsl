@@ -5,7 +5,7 @@ varying vec3 vColor;
 
 void main()
 {
-  float floatingFactor = 0.007;
+  float floatingFactor = 0.01;
   /**
     * Position
     */
