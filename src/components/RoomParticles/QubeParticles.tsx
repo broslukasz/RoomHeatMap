@@ -6,7 +6,6 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import particlesVertexShader from './shaders/particles.vertex.glsl'
 import particlesFragmentShader from './shaders/particles.fragment.glsl'
-import { AdditiveBlending } from 'three';
 
 type QubeParticlesProps = {
   particleSize: number;
