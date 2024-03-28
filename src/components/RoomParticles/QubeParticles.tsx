@@ -77,7 +77,6 @@ export default function QubeParticles({particleSize, qubeSize, position, selecti
         vertexColors={true}
         needsUpdate={true}
         transparent={true}
-        blending={AdditiveBlending}
         vertexShader={particlesVertexShader}
         fragmentShader={particlesFragmentShader}
         uniforms={{
