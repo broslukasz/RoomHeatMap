@@ -31,29 +31,11 @@ export default function QubeParticles({particleSize, qubeSize, position, selecti
   }, [qubeSize, selectionRange, position])
 
   const texture = useTexture('src/assets/particle.png');
-
-  let x: number, y: number, z: number;
-  let i: number, i3: number;
   
   useFrame(() =>
   {
-    const elapsedTime = clock.getElapsedTime();
-    const particleGeometry = particlesRef.current.geometry;
-    const floatingFactor = 0.0003;
-    
-    for(i  = 0; i < positions.length; i++) {
-      i3 = i * 3;
-
-      x = particleGeometry.attributes.position.array[i3];
-      y = particleGeometry.attributes.position.array[i3 + 1];
-      z = particleGeometry.attributes.position.array[i3 + 2];
-
-      particleGeometry.attributes.position.array[i3] = particleGeometry.attributes.position.array[i3] + Math.sin(elapsedTime + x) * floatingFactor;
-      particleGeometry.attributes.position.array[i3 + 1] = particleGeometry.attributes.position.array[i3 + 1] + Math.sin(elapsedTime + y) * floatingFactor;
-      particleGeometry.attributes.position.array[i3 + 2] = particleGeometry.attributes.position.array[i3 + 2] + Math.sin(elapsedTime + z) * floatingFactor;
-    }
-
-    particleGeometry.attributes.position.needsUpdate = true;
+    // Update Material
+    pointsMaterialRef.current.uniforms.uTime.value = clock.getElapsedTime();
   })
 
   return (
@@ -79,7 +61,8 @@ export default function QubeParticles({particleSize, qubeSize, position, selecti
         vertexShader={particlesVertexShader}
         fragmentShader={particlesFragmentShader}
         uniforms={{
-          uSize: {value: particleSize * gl.getPixelRatio()}
+          uSize: {value: particleSize * gl.getPixelRatio()},
+          uTime: {value: 0},
         }}
          />
     </points>
