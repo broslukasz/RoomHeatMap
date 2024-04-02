@@ -31,6 +31,8 @@ export default function QubeParticles({particleSize, qubeSize, position, selecti
   }, [qubeSize, selectionRange, position])
 
   const texture = useTexture('src/assets/particle.png');
+
+  console.log(texture)
   
   useFrame(() =>
   {
