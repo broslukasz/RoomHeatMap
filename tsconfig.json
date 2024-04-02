@@ -5,6 +5,7 @@
     },
     "allowSyntheticDefaultImports": true,
     "jsx": "react-jsx",
+    "moduleResolution": "Bundler",
     "target": "ES2020"
   }
 }

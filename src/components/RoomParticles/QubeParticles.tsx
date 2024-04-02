@@ -2,7 +2,7 @@ import { useTexture } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber'
 
 import getRoomParameters from './getRoomParameters';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 import particlesVertexShader from './shaders/particles.vertex.glsl'
 import particlesFragmentShader from './shaders/particles.fragment.glsl'
@@ -31,8 +31,6 @@ export default function QubeParticles({particleSize, qubeSize, position, selecti
   }, [qubeSize, selectionRange, position])
 
   const texture = useTexture('src/assets/particle.png');
-
-  console.log(texture)
   
   useFrame(() =>
   {
