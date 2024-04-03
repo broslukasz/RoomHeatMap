@@ -17,15 +17,18 @@ export const Experience = () => {
     value: 1, min: 0, max: 5, step: 1
   }
 
-  const {  particleSize, qubeSize, performanceVisible, selectionRange, X, Y, Z } = useControls({ 
+  const {  particleSize, qubeSize, performanceVisible } = useControls({ 
       particleSize: particleSizeControl,  
       qubeSize: qubeSizeControl,
-      X: positionControl.x,
-      Y: positionControl.y,
-      Z: positionControl.z,
-      selectionRange: selectionRangeControl,
       performanceVisible: false,
   })
+
+  const {  X, Y, Z, selectionRange } = useControls('measurement',{ 
+    X: positionControl.x,
+    Y: positionControl.y,
+    Z: positionControl.z,
+    selectionRange: selectionRangeControl,
+})
   
   return (
     <>
