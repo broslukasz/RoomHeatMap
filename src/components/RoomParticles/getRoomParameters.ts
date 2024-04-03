@@ -1,11 +1,12 @@
 import { IMeasurementSettings as IMeasurementSettings } from "./models/IMeasurementSettings";
 import colorSelectedParticle from "./functions/colorSelectedParticle";
 import { colorParticleWithRange } from "./functions/colorParticlesWithRange";
+import { ICubeSettings } from "./models/ICubeSettings";
 
-export default function getRoomParameters(qubeSize: number, measurementSettings: IMeasurementSettings): [Float32Array, Float32Array] {
+export default function getRoomParameters({qubeSize, particlesDistance}: ICubeSettings, measurementSettings: IMeasurementSettings): [Float32Array, Float32Array] {
   const particlesCount = qubeSize * qubeSize * qubeSize;
   const numberOfParametersPerParticle = 3;
-  const distanceBetweenParticles = 1;
+  const distanceBetweenParticles = particlesDistance;
 
   const positions = new Float32Array(particlesCount * numberOfParametersPerParticle);
   let colors = new Float32Array(particlesCount * numberOfParametersPerParticle);

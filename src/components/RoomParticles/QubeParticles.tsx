@@ -10,18 +10,19 @@ import particlesFragmentShader from './shaders/particles.fragment.glsl'
 type QubeParticlesProps = {
   particleSize: number;
   qubeSize: number;
+  particlesDistance: number;
   position: [number, number, number],
   selectionRange?: number;
 }
 
-export default function QubeParticles({particleSize, qubeSize, position, selectionRange = 0}: QubeParticlesProps) {
-  const { clock, gl, scene } = useThree();
+export default function QubeParticles({particleSize, qubeSize, particlesDistance, position, selectionRange = 0}: QubeParticlesProps) {
+  const { clock, gl } = useThree();
   let geometryRef = useRef<THREE.BufferGeometry>(null);
   let pointsMaterialRef = useRef<THREE.ShaderMaterial>(null);
   let particlesRef = useRef<THREE.Points>(null);
 
   let [positions, colors] = useMemo(() => {
-    return getRoomParameters(qubeSize, {position, selectionRange });    
+    return getRoomParameters({qubeSize, particlesDistance}, {position, selectionRange });    
   }, [qubeSize, position, selectionRange])
 
   useEffect(() =>{

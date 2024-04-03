@@ -6,6 +6,7 @@ import { Perf } from "r3f-perf";
 export const Experience = () => {
   const particleSizeControl = { value: 200, min: 50, max: 400, step: 10 };
   const qubeSizeControl = { value: 5, min: 1, max: 20, step: 1 };
+  const particleDistanceControl = { value: 1, min: 0, max: 5, step: 0.01 };
 
   const positionControl = {
     x: { value: 2, min: 1, max: 20, step: 1 },
@@ -17,9 +18,10 @@ export const Experience = () => {
     value: 1, min: 0, max: 5, step: 1
   }
 
-  const {  particleSize, qubeSize, performanceVisible } = useControls({ 
+  const {  particleSize, qubeSize, performanceVisible, particleDistance } = useControls({ 
       particleSize: particleSizeControl,  
       qubeSize: qubeSizeControl,
+      particleDistance: particleDistanceControl,
       performanceVisible: false,
   })
 
@@ -34,7 +36,7 @@ export const Experience = () => {
     <>
       { performanceVisible && <Perf position={'top-left'}></Perf>}
       <OrbitControls />
-      <QubeParticles particleSize={particleSize} qubeSize={qubeSize} position={[X, Y, Z]} selectionRange={range} />
+      <QubeParticles particleSize={particleSize} qubeSize={qubeSize} particlesDistance={particleDistance} position={[X, Y, Z]} selectionRange={range} />
     </>
   );
 };
