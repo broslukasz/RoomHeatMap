@@ -4,7 +4,7 @@ import { useControls } from "leva";
 import { Perf } from "r3f-perf";
 
 export const Experience = () => {
-  const particleSizeControl = { value: 200, min: 50, max: 400, step: 10 };
+  const particleSizeControl = { value: 200, min: 1, max: 400, step: 10 };
   const qubeSizeControl = { value: 5, min: 1, max: 20, step: 1 };
   const particleDistanceControl = { value: 1, min: 0, max: 5, step: 0.01 };
 
