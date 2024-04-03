@@ -29,6 +29,7 @@ export default function QubeParticles({particleSize, qubeSize, particlesDistance
     geometryRef.current.dispose();
     pointsMaterialRef.current.dispose();
     particlesRef.current.clear();
+
   }, [qubeSize, selectionRange, position])
 
   const texture = useTexture('src/assets/particle.png');
@@ -39,8 +40,10 @@ export default function QubeParticles({particleSize, qubeSize, particlesDistance
     pointsMaterialRef.current.uniforms.uTime.value = clock.getElapsedTime();
   })
 
+  const translatedPosition = -qubeSize / 2 * particlesDistance + 0.5;
+
   return (
-    <points ref={particlesRef} position={[-qubeSize / 2 + 0.5, -qubeSize / 2 + 0.5, -qubeSize / 2 + 0.5]}>
+    <points ref={particlesRef} position={[translatedPosition, translatedPosition, translatedPosition]}>
       <bufferGeometry ref={geometryRef}>
         <bufferAttribute
           attach="attributes-position"
