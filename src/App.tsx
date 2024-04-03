@@ -3,9 +3,10 @@ import { Experience } from "./components/Experience";
 import { Leva } from "leva";
 
 function App() {
+  const cameraScalingFactor = 0.8;
   return (<>
       <Leva collapsed />
-        <Canvas shadows camera={{ position: [5, 6, 10], fov: 30 }}>
+        <Canvas shadows camera={{ position: [0.5 * cameraScalingFactor, 1 * cameraScalingFactor, 2 * cameraScalingFactor], fov: 30 }}>
           <color attach="background" args={["#000000"]} />
           <Experience />
         </Canvas>

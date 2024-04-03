@@ -40,7 +40,8 @@ export default function QubeParticles({particleSize, qubeSize, particlesDistance
     pointsMaterialRef.current.uniforms.uTime.value = clock.getElapsedTime();
   })
 
-  const translatedPosition = -qubeSize / 2 * particlesDistance + 0.5;
+  const makePositionCentral = 0.5;
+  const translatedPosition = -qubeSize / 2 * particlesDistance + makePositionCentral * particlesDistance;
 
   return (
     <points ref={particlesRef} position={[translatedPosition, translatedPosition, translatedPosition]}>
