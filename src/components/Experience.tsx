@@ -23,18 +23,18 @@ export const Experience = () => {
       performanceVisible: false,
   })
 
-  const {  X, Y, Z, selectionRange } = useControls('measurement',{ 
+  const {  X, Y, Z, range } = useControls('measurement',{ 
     X: positionControl.x,
     Y: positionControl.y,
     Z: positionControl.z,
-    selectionRange: selectionRangeControl,
+    range: selectionRangeControl,
 })
   
   return (
     <>
       { performanceVisible && <Perf position={'top-left'}></Perf>}
       <OrbitControls />
-      <QubeParticles particleSize={particleSize} qubeSize={qubeSize} position={[X, Y, Z]} selectionRange={selectionRange} />
+      <QubeParticles particleSize={particleSize} qubeSize={qubeSize} position={[X, Y, Z]} selectionRange={range} />
     </>
   );
 };
