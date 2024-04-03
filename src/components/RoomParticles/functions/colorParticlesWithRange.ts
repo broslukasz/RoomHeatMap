@@ -1,10 +1,10 @@
-import { IColorSettings } from "../models/IColorSettings";
+import { IMeasurementSettings } from "../models/IMeasurementSettings";
 
-export function colorParticleWithRange(colors: Float32Array, colorSettings: IColorSettings, yIndexOffset: number, zIndexOffset: number): Float32Array {
-  const [x, y ,z] = colorSettings.position;
+export function colorParticleWithRange(colors: Float32Array, measurementSettings: IMeasurementSettings, yIndexOffset: number, zIndexOffset: number): Float32Array {
+  const [x, y ,z] = measurementSettings.position;
 
-  const positives = Array.from(Array(colorSettings.selectionRange + 1).keys())
-  const negatives = Array.from(Array(colorSettings.selectionRange + 1).keys()).map(value => -value).filter(value => value !== 0).reverse();
+  const positives = Array.from(Array(measurementSettings.selectionRange + 1).keys())
+  const negatives = Array.from(Array(measurementSettings.selectionRange + 1).keys()).map(value => -value).filter(value => value !== 0).reverse();
   const allValues = [...negatives, ...positives];
 
   let translatedPointInFloatIndex: number;

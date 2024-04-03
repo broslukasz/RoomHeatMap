@@ -1,10 +1,11 @@
-import { IColorSettings } from "./models/IColorSettings";
+import { IMeasurementSettings as IMeasurementSettings } from "./models/IMeasurementSettings";
 import colorSelectedParticle from "./functions/colorSelectedParticle";
 import { colorParticleWithRange } from "./functions/colorParticlesWithRange";
 
-export default function getRoomParameters(qubeSize: number, colorSettings: IColorSettings): [Float32Array, Float32Array] {
+export default function getRoomParameters(qubeSize: number, measurementSettings: IMeasurementSettings): [Float32Array, Float32Array] {
   const particlesCount = qubeSize * qubeSize * qubeSize;
   const numberOfParametersPerParticle = 3;
+  const distanceBetweenParticles = 1;
 
   const positions = new Float32Array(particlesCount * numberOfParametersPerParticle);
   let colors = new Float32Array(particlesCount * numberOfParametersPerParticle);
@@ -23,9 +24,9 @@ export default function getRoomParameters(qubeSize: number, colorSettings: IColo
     currentPositionInFloatY = i * numberOfParametersPerParticle + yIndex;
     currentPositionInFloatZ = i * numberOfParametersPerParticle + zIndex;
 
-    positions[currentPositionInFloatX] = currentParticlePosition[xIndex];
-    positions[currentPositionInFloatY] = currentParticlePosition[yIndex];
-    positions[currentPositionInFloatZ] = currentParticlePosition[zIndex];
+    positions[currentPositionInFloatX] = currentParticlePosition[xIndex] * distanceBetweenParticles;
+    positions[currentPositionInFloatY] = currentParticlePosition[yIndex] * distanceBetweenParticles;
+    positions[currentPositionInFloatZ] = currentParticlePosition[zIndex] * distanceBetweenParticles;
 
     colors[currentPositionInFloatX] = 0.8;
     colors[currentPositionInFloatY] = 0.8;
@@ -61,14 +62,14 @@ export default function getRoomParameters(qubeSize: number, colorSettings: IColo
   }
 
   function assignColors(): void {
-    const [x, y ,z] = colorSettings.position;
+    const [x, y ,z] = measurementSettings.position;
     const yIndexOffset = qubeSize;
     const zIndexOffset = qubeSize * qubeSize;
     
     const pointInFloat = x + y * yIndexOffset + z * zIndexOffset;
     const pointInFloatIndex = pointInFloat * numberOfParametersPerParticle;
     
-    colors = colorParticleWithRange(colors, colorSettings, yIndexOffset, zIndexOffset);
+    colors = colorParticleWithRange(colors, measurementSettings, yIndexOffset, zIndexOffset);
     colors = colorSelectedParticle(colors, pointInFloatIndex);
   }
 }
