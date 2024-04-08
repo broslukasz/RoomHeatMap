@@ -10,17 +10,17 @@ void main()
     * Position
     */
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-  modelPosition.x += sin(uTime + modelPosition.x) * floatingFactor;
-  modelPosition.x += sin(uTime + modelPosition.y) * floatingFactor;
-  modelPosition.x += sin(uTime + modelPosition.z) * floatingFactor;
+  // modelPosition.x += sin(uTime + modelPosition.x) * floatingFactor;
+  // modelPosition.x += sin(uTime + modelPosition.y) * floatingFactor;
+  // modelPosition.x += sin(uTime + modelPosition.z) * floatingFactor;
 
-  modelPosition.y += sin(uTime + modelPosition.x) * floatingFactor;
-  modelPosition.y += sin(uTime + modelPosition.y) * floatingFactor;
-  modelPosition.y += sin(uTime + modelPosition.z) * floatingFactor;
+  // modelPosition.y += sin(uTime + modelPosition.x) * floatingFactor;
+  // modelPosition.y += sin(uTime + modelPosition.y) * floatingFactor;
+  // modelPosition.y += sin(uTime + modelPosition.z) * floatingFactor;
 
-  modelPosition.z += sin(uTime + modelPosition.x) * floatingFactor;
-  modelPosition.z += sin(uTime + modelPosition.y) * floatingFactor;
-  modelPosition.z += sin(uTime + modelPosition.z) * floatingFactor;
+  // modelPosition.z += sin(uTime + modelPosition.x) * floatingFactor;
+  // modelPosition.z += sin(uTime + modelPosition.y) * floatingFactor;
+  // modelPosition.z += sin(uTime + modelPosition.z) * floatingFactor;
 
 
   vec4 viewPosition = viewMatrix * modelPosition;

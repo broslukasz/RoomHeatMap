@@ -2,8 +2,14 @@ import { IMeasurementSettings as IMeasurementSettings } from "./models/IMeasurem
 import colorSelectedParticle from "./functions/colorSelectedParticle";
 import { colorParticleWithRange } from "./functions/colorParticlesWithRange";
 import { ICubeSettings } from "./models/ICubeSettings";
+import * as THREE from 'three';
 
-export default function getRoomParameters({qubeSize, particlesDistance}: ICubeSettings, measurementSettings: IMeasurementSettings): [Float32Array, Float32Array] {
+export default function getRoomParameters<T = undefined>(
+   {qubeSize, particlesDistance}: ICubeSettings,
+   measurementSettings: IMeasurementSettings,
+   mesh: THREE.Mesh<THREE.BufferGeometry<THREE.NormalBufferAttributes>, THREE.Material | THREE.Material[]>,
+   translatedPosition: number
+  ): [Float32Array, Float32Array] {
   const particlesCount = qubeSize * qubeSize * qubeSize;
   const numberOfParametersPerParticle = 3;
   const distanceBetweenParticles = particlesDistance;
@@ -20,6 +26,8 @@ export default function getRoomParameters({qubeSize, particlesDistance}: ICubeSe
   let currentPositionInFloatZ: number;
   
   let i: number;
+  let isInside: boolean;
+  let rayDirection = new THREE.Vector3(1, 0, 0).normalize();
   for(i = 0; i < particlesCount; i++) {
     currentPositionInFloatX = i * numberOfParametersPerParticle;
     currentPositionInFloatY = i * numberOfParametersPerParticle + yIndex;
@@ -29,9 +37,26 @@ export default function getRoomParameters({qubeSize, particlesDistance}: ICubeSe
     positions[currentPositionInFloatY] = currentParticlePosition[yIndex] * distanceBetweenParticles;
     positions[currentPositionInFloatZ] = currentParticlePosition[zIndex] * distanceBetweenParticles;
 
-    colors[currentPositionInFloatX] = 0.8;
-    colors[currentPositionInFloatY] = 0.8;
-    colors[currentPositionInFloatZ] = 0.8;
+    if(mesh) {
+      let raycasterPosition = new THREE.Vector3(
+        positions[currentPositionInFloatX] + translatedPosition,
+        positions[currentPositionInFloatY] + translatedPosition,
+        positions[currentPositionInFloatZ] + translatedPosition
+      );
+
+      const ray = new THREE.Raycaster(raycasterPosition, rayDirection);      
+      mesh.updateMatrixWorld();
+      const hit = ray.intersectObject(mesh as THREE.Object3D);
+
+      // const arrowHelper = new THREE.ArrowHelper(rayDirection, raycasterPosition);
+      // scene.add(arrowHelper)
+
+      isInside = hit.length % 2 === 1; 
+    }
+
+    colors[currentPositionInFloatX] = isInside ? 0.8 : 0.0;
+    colors[currentPositionInFloatY] = isInside ? 0.8 : 0.1;
+    colors[currentPositionInFloatZ] = isInside ? 0.8 : 0.0;
 
     generateNextParticle();
   }
@@ -63,7 +88,7 @@ export default function getRoomParameters({qubeSize, particlesDistance}: ICubeSe
   }
 
   function assignColors(): void {
-    const [x, y ,z] = measurementSettings.position;
+    const [x, y ,z] = measurementSettings.measurementPosition;
     const yIndexOffset = qubeSize;
     const zIndexOffset = qubeSize * qubeSize;
     

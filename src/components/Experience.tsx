@@ -36,14 +36,7 @@ export const Experience = () => {
     <>
       { performanceVisible && <Perf position={'top-left'}></Perf>}
       <OrbitControls />
-      <QubeParticles particleSize={particleSize} qubeSize={qubeSize} particlesDistance={particleDistance} position={[X, Y, Z]} selectionRange={range} />
-
-      {/* <mesh>
-        <boxGeometry />
-        <meshStandardMaterial />
-      </mesh>
-
-      <ambientLight intensity={2}></ambientLight> */}
+      <QubeParticles particleSize={particleSize} qubeSize={qubeSize} particlesDistance={particleDistance} measurementPosition={[X, Y, Z]} measurementRange={range} />
     </>
   );
 };

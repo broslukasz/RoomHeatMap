@@ -1,4 +1,4 @@
 export interface IMeasurementSettings {
-  position: [number, number, number];
-  selectionRange: number;
+  measurementPosition: [number, number, number];
+  measurementRange: number;
 }
